@@ -8,8 +8,24 @@ set -o xtrace
 # https://chaos-mesh.org/docs/installation/get_started_on_minikube/
 echo "===============================Install Chaos Mesh==========================================================="
 
+kubectl get nodes
+strace -eopenat kubectl version
+
+docker container ls
+docker version
+kubeadm version
+kubectl version
+kubelet version
+
+# Kubernetes master is running at https://135.122.6.50:6443
+kubectl cluster-info
+
 kubectl config get-contexts
-kubectl config use-context minikube
+# CURRENT   NAME   CLUSTER   AUTHINFO   NAMESPACE
+# kubectl config use-context minikube
+# error: no context exists with the name: "minikube"
+
+
 
 # Check whether the helm tiller pod is running
 kubectl -n kube-system get pods -l app=helm
