@@ -5,11 +5,14 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
-# https://chaos-mesh.org/docs/installation/get_started_on_kind/
+# https://chaos-mesh.org/docs/installation/get_started_on_minikube/
 echo "===============================Install Chaos Mesh==========================================================="
 
-/bin/sh -c 'curl -sSL https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/install.sh | bash -s -- --local kind' 
-# curl -sSL https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/install.sh | bash -s -- --local kind
+# Check whether the helm tiller pod is running
+kubectl -n kube-system get pods -l app=helm
+
+/bin/sh -c 'curl -sSL https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/install.sh | bash' 
+# curl -sSL https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/install.sh | bash
 
 
 #Deploy the sample application

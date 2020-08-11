@@ -37,3 +37,80 @@ matrix:
         - sudo kind delete cluster --name tutorial-cluster
       after_success:
         - deactivate
+
+    - name: "chaos mesh  snapped minikube kubectl helm Python 3.7 on bionic" #OK
+      dist: bionic
+      addons:
+        snaps:
+          - name: minikube
+            confinement: classic
+            channel: latest/stable
+          - name: kubectl
+            confinement: classic
+            channel: latest/stable
+          - name: helm
+            confinement: classic
+            channel: latest/stable
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - minikube version
+        - helm version
+        - kubectl version --client
+        - sudo make deploy-chaosmesh
+      after_success:
+        - deactivate
+                
+
+    - name: "chaos mesh  w snapped microk8s Python 3.7 on bionic"
+      dist: bionic
+      addons:
+        snaps:
+          - name: microk8s
+            confinement: classic # or devmode
+            channel: latest/stable # will be passed to --channel flag
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - sudo make deploy-microk8s
+        - sudo make deploy-chaosmesh
+      after_success:
+        - deactivate
+
+    - name: "chaos mesh k3d single master w snapped kubectl helm multipass Python 3.7 on bionic amd64"
+      os: linux
+      dist: bionic
+      arch: amd64
+      addons:
+        snaps:
+          - name: multipass
+            confinement: classic # or devmode
+            channel: latest/stable # will be passed to --channel flag
+          - name: kubectl
+            confinement: classic # or devmode
+            channel: latest/stable # will be passed to --channel flag
+          - name: helm
+            confinement: classic # or devmode
+            channel: latest/stable # will be passed to --channel flag
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - sudo make deploy-k3d
+        - sudo make deploy-chaosmesh
+      after_success:
+        - deactivate        

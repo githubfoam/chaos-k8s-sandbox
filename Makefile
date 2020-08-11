@@ -1,8 +1,8 @@
 IMAGE := alpine/fio
 APP:="app/deploy-openesb.sh"
 
-deploy-chaosmesh:
-	bash app/deploy-chaosmesh.sh
+deploy-chaosmesh-kind:
+	bash app/deploy-chaosmesh-kind.sh
 
 provision-helm:
 	bash app/provision-helm.sh
@@ -12,6 +12,12 @@ provision-kubectl:
 
 deploy-kind:
 	bash platform/deploy-kind.sh
+
+deploy-microk8s:
+	bash platform/deploy-microk8s.sh
+
+deploy-microk8s:
+	bash platform/deploy-k3d.sh
 
 push-image:
 	docker push $(IMAGE)
