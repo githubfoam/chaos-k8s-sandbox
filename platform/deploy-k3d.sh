@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-echo "=============================k3d============================================================="
-sh -c "curl -s https://raw.githubusercontent.com/rancher/k3d/master/install.sh | bash" #grab the latest release
+echo "=============================Install k3d============================================================="
+/bin/sh -c "curl -s https://raw.githubusercontent.com/rancher/k3d/master/install.sh | bash" #grab the latest release
 k3d version
 k3d check-tools #Check if docker is running
 k3d --timestamp --verbose  create cluster --wait 360 --name demo --workers 4

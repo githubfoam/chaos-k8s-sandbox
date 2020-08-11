@@ -55,7 +55,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-microk8s
-        - sudo make deploy-chaosmesh-minikube
+        - sudo make deploy-chaosmesh
       after_success:
         - deactivate
 
@@ -82,8 +82,10 @@ matrix:
         - source ~venvpy3/bin/activate
         - pip install -r requirements.txt
       script:
+        - helm version
+        - kubectl version --client        
         - sudo make deploy-k3d
-        - sudo make deploy-chaosmesh-minikube
+        - sudo make deploy-chaosmesh
       after_success:
         - deactivate  
 

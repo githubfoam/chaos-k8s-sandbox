@@ -7,6 +7,9 @@ deploy-chaosmesh-minikube:
 deploy-chaosmesh-kind:
 	bash app/deploy-chaosmesh-kind.sh
 
+deploy-chaosmesh:
+	bash app/deploy-chaosmesh.sh
+
 provision-helm:
 	bash app/provision-helm.sh
 
