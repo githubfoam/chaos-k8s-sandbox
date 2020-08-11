@@ -11,7 +11,7 @@ provision-kubectl:
 	bash app/provision-kubectl.sh
 
 deploy-kind:
-	bash deploy-kind.sh
+	bash platform/deploy-kind.sh
 
 push-image:
 	docker push $(IMAGE)
