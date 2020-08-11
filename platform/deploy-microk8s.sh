@@ -30,7 +30,11 @@ microk8s kubectl get service --all-namespaces # find a Service IP,list all servi
 microk8s kubectl get nodes
 microk8s kubectl get services
 
+# activate helm
+# microk8s enable dns dashboard helm3 prometheus rbac registry storage
 
+# activate helm3
+microk8s enable dns dashboard helm prometheus rbac registry storage
 
 
 microk8s kubectl version

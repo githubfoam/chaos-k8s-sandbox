@@ -55,7 +55,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-microk8s
-        - sudo make deploy-chaosmesh
+        - sudo make deploy-chaosmesh-microk8s
       after_success:
         - deactivate
 

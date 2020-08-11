@@ -1,4 +1,9 @@
 #!/bin/bash
+set -o errexit
+set -o pipefail
+set -o nounset
+set -o xtrace
+# set -eox pipefail #safety for script
 
 
 echo "=============================Install k3d============================================================="
@@ -10,6 +15,7 @@ docker ps
 k3d list clusters
 export KUBECONFIG="$(sudo k3d get-kubeconfig --name='demo')"
 cat $KUBECONFIG
+
 kubectl get nodes
 sudo kubectl get pod -o wide
 sudo kubectl get pod -n kube-system -o wide
@@ -17,6 +23,8 @@ sudo kubectl get pod -n default -o wide
 sudo kubectl get pods --all-namespaces
 sudo kubectl get service --all-namespaces
 sudo kubectl cluster-info
+
+
 for i in {1..60}; do # Timeout after 5 minutes, 60x1=60 secs
       if nc -z -v 127.0.0.1 6443 2>&1 | grep succeeded ; then
         break
@@ -32,6 +40,8 @@ for i in {1..60}; do # Timeout after 5 minutes, 60x7= 7 mins
 done
 kubectl get nodes --all-namespaces # verify "*helm-install-traefik-*"
 kubectl get pods --namespace=kube-system # verify namespace=kube-system Running
+
+
 echo "Waiting for Kubernetes to be ready ..."
 for i in {1..150}; do # Timeout after 5 minutes, 150x2=300 secs
       if sudo kubectl get pods --namespace=kube-system | grep Running ; then
@@ -39,6 +49,7 @@ for i in {1..150}; do # Timeout after 5 minutes, 150x2=300 secs
       fi
       sleep 2
 done
+
 kubectl get pods --namespace=kube-system # verify namespace=kube-system Running
 kubectl get nodes
 kubectl get pod -o wide
