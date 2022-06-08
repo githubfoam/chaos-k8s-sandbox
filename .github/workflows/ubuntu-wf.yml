@@ -9,7 +9,7 @@ jobs:
 
 # https://gremlin.org/reference/usage/install/
   gremlin-ubuntu-latest-job:
-    name: "gremlin on ubuntu-latest"
+    name: "chaos mesh k3d on ubuntu-latest"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +19,7 @@ jobs:
       run: |
         # Install Python
         sudo apt-get install python3 python3-venv
+        sudo pip3 install virtualenv
         # Create a virtual environment
         virtualenv -p $(which python3) ~venvpy3
         source ~venvpy3/bin/activate
