@@ -15,10 +15,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status 
-    - name: "Install gremlin"
+    - name: "Install chaos mesh k3d"
       run: |
         # Install Python
-        sudo apt-get install python3 python3-venv
+        sudo apt-get install python3
         sudo pip3 install virtualenv
         # Create a virtual environment
         virtualenv -p $(which python3) ~venvpy3
