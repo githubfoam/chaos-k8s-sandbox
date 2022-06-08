@@ -5,7 +5,7 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
-https://helm.sh/docs/intro/install/
+# https://helm.sh/docs/intro/install/
 echo fetch and install helm...
 # HELM_ARCHIVE=helm-v2.12.1-linux-amd64.tar.gz
 # https://github.com/helm/helm/releases
