@@ -24,6 +24,7 @@ jobs:
         virtualenv -p $(which python3) ~venvpy3
         source ~venvpy3/bin/activate
         pip install -r requirements.txt
+        sudo make deploy-microk8s provision-helm
         
         
 
